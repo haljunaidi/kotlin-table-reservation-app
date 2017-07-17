@@ -17,6 +17,10 @@ class RetrofitManager : OnlineDataManager {
         @GET("customer-list.json")
         fun getCustomers() : Observable<List<Customer>>
 
+        @GET("table-map.json")
+        fun getTablesMap() : Observable<List<Boolean>>
+
+
     }
 
     var api: ReservationsAPI
@@ -35,6 +39,10 @@ class RetrofitManager : OnlineDataManager {
 
     override fun getCustomers(): Observable<List<Customer>> {
         return api.getCustomers()
+    }
+
+    override fun getTablesMap(): Observable<List<Boolean>> {
+        return api.getTablesMap()
     }
 
 

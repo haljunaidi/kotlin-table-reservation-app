@@ -2,9 +2,9 @@ package pt.joaocruz.myreservationschallenge;
 
 import android.app.Application;
 
-import pt.joaocruz.myreservationschallenge.dagger.AppComponent;
-import pt.joaocruz.myreservationschallenge.dagger.AppModule;
-import pt.joaocruz.myreservationschallenge.dagger.DaggerAppComponent;
+import com.orm.SugarContext;
+
+import pt.joaocruz.myreservationschallenge.dagger.*;
 
 /**
  * Created by jcruz on 17.07.17.
@@ -19,7 +19,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-
+        SugarContext.init(this);
         appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule())
                 .build();

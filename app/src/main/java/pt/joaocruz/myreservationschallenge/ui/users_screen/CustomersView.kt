@@ -1,4 +1,4 @@
-package pt.joaocruz.myreservationschallenge.users_screen
+package pt.joaocruz.myreservationschallenge.ui.users_screen
 
 import pt.joaocruz.myreservationschallenge.model.Customer
 
@@ -8,5 +8,6 @@ import pt.joaocruz.myreservationschallenge.model.Customer
 interface CustomersView {
 
     fun updateCustomerList(customers: List<Customer>)
+    fun showTablesScreenForCustomer(customer: Customer)
 
 }

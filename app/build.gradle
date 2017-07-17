@@ -49,6 +49,8 @@ dependencies {
     // Anko
     compile "org.jetbrains.anko:anko-commons:$anko_version"
 
+    // Sugar ORM
+    compile 'com.github.satyan:sugar:1.5'
 
 }
 repositories {
