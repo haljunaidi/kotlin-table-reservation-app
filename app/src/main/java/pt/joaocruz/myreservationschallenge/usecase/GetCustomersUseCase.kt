@@ -11,7 +11,7 @@ class GetCustomersUseCase(dataManager: DataManager) : UseCase {
 
     var dm = dataManager
 
-    override fun build(): Observable<List<Customer>> {
+    override fun build(): Observable<ArrayList<Customer>> {
         return dm.getCustomersList()
     }
 

@@ -13,7 +13,7 @@ class DataManagerImpl(onlineDataManager: OnlineDataManager, networkServices: Net
     val local = localDataManager
     val network = networkServices
 
-    override fun getCustomersList(): Observable<List<Customer>> {
+    override fun getCustomersList(): Observable<ArrayList<Customer>> {
         if (network.hasInternet())
             return remote.getCustomers()
         else
@@ -39,5 +39,9 @@ class DataManagerImpl(onlineDataManager: OnlineDataManager, networkServices: Net
 
     override fun getCustomerWithID(id: Long): Customer? {
         return local.getCustomerWithID(id)
+    }
+
+    override fun deleteAllReservations() {
+        local.deleteAllReservations()
     }
 }

@@ -5,6 +5,6 @@ package pt.joaocruz.myreservationschallenge.model
  */
 class TablesMap {
 
-    var tables: List<Boolean>?=null
+    var tables: ArrayList<Boolean>?=null
 
 }

@@ -11,7 +11,8 @@ interface LocalDataManager {
 
     fun storeCustomers(customers: List<Customer>)
     fun storeTablesMap(tablesMap: TablesMap)
-    fun getCustomers(): Observable<List<Customer>>
+    fun getCustomers(): Observable<ArrayList<Customer>>
     fun getTablesMap(): Observable<TablesMap>
     fun getCustomerWithID(id: Long): Customer?
+    fun deleteAllReservations()
 }

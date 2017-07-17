@@ -16,8 +16,10 @@ class DBLocalDataManager : LocalDataManager {
         SugarRecord.saveInTx(customers)
     }
 
-    override fun getCustomers(): Observable<List<Customer>> {
-        return Observable.just(Select.from(Customer::class.java).list())
+    override fun getCustomers(): Observable<ArrayList<Customer>> {
+        val list = ArrayList<Customer>()
+        list.addAll(Select.from(Customer::class.java).list())
+        return Observable.just(list)
     }
 
     override fun storeTablesMap(tablesMap: TablesMap) {
@@ -35,5 +37,15 @@ class DBLocalDataManager : LocalDataManager {
             return Customer()
         else
             return result
+    }
+
+    override fun deleteAllReservations() {
+        var tablesMap = SharedPrefManager().loadTablesMap()
+        if (tablesMap.tables!=null) {
+            for (i in 0..(tablesMap.tables!!.size-1)) {
+                tablesMap.tables!![i] = true
+            }
+            storeTablesMap(tablesMap)
+        }
     }
 }

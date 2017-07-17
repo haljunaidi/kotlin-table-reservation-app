@@ -12,18 +12,20 @@ import pt.joaocruz.myreservationschallenge.model.TablesMap
  * Created by jcruz on 17.07.17.
  */
 
-class GridAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class GridAdapter(tablesMap: TablesMap): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val tables = ArrayList<Boolean>()
+    var tablesMap: TablesMap = tablesMap
+    var selectedItem = -1
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         if (holder is TableViewHolder) {
-            holder.bindTable(tables[position], position)
+            val table = tablesMap.tables?.get(position)?:false
+            holder.bindTable(table, position, (position==selectedItem))
         }
     }
 
     override fun getItemCount(): Int {
-        return tables.size
+        return tablesMap.tables?.size?:0
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -32,9 +34,13 @@ class GridAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return holder
     }
 
+    fun selectedItemAt(position: Int) {
+        selectedItem = position
+        notifyDataSetChanged()
+    }
+
     fun setTables(tables: TablesMap) {
-        this.tables.clear()
-        this.tables.addAll(tables.tables?:ArrayList())
+        this.tablesMap = tables
         notifyDataSetChanged()
     }
 

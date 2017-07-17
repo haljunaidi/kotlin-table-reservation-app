@@ -10,5 +10,5 @@ interface TablesView {
 
     fun updateTables(tablesMap: TablesMap)
     fun updateWithCustomer(customer: Customer)
-
+    fun goBackToCustomers()
 }

@@ -9,10 +9,10 @@ import pt.joaocruz.myreservationschallenge.model.TablesMap
  */
 interface DataManager {
 
-    fun getCustomersList() : Observable<List<Customer>>
+    fun getCustomersList() : Observable<ArrayList<Customer>>
     fun getTablesMap(): Observable<TablesMap>
     fun saveCustomerList(customers: List<Customer>)
     fun saveTablesMap(tablesMap: TablesMap)
     fun getCustomerWithID(id: Long): Customer?
-
+    fun deleteAllReservations()
 }

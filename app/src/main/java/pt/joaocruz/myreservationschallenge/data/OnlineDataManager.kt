@@ -8,6 +8,6 @@ import pt.joaocruz.myreservationschallenge.model.Customer
  */
 interface OnlineDataManager {
 
-    fun getCustomers(): Observable<List<Customer>>
-    fun getTablesMap(): Observable<List<Boolean>>
+    fun getCustomers(): Observable<ArrayList<Customer>>
+    fun getTablesMap(): Observable<ArrayList<Boolean>>
 }

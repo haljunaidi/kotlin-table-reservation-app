@@ -3,6 +3,7 @@ package pt.joaocruz.myreservationschallenge.ui.tables_screen
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import pt.joaocruz.myreservationschallenge.data.DataManager
+import pt.joaocruz.myreservationschallenge.model.TablesMap
 import pt.joaocruz.myreservationschallenge.usecase.GetCustomerUseCase
 import pt.joaocruz.myreservationschallenge.usecase.GetTablesMapUseCase
 
@@ -48,5 +49,11 @@ class TablesPresenterImpl(tablesMapUseCase: GetTablesMapUseCase, customerUseCase
                         checkTables()
                     }
                 }
+    }
+
+    override fun clickedSubmitWithSelectedPosition(position: Int, tablesMap: TablesMap) {
+        tablesMap.tables?.set(position, false)
+        dm.saveTablesMap(tablesMap)
+        view?.goBackToCustomers()
     }
 }
