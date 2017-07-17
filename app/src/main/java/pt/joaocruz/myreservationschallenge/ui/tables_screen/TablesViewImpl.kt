@@ -33,6 +33,7 @@ class TablesViewImpl : TablesView, AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(pt.joaocruz.myreservationschallenge.R.layout.activity_tables_layout)
         App.getInstance().appComponent.inject(this)
+        setupRecyclerView()
         var customer = intent.getLongExtra("customer_id", -1)
         presenter.registerView(this)
         presenter.loadCustomerForID(customer)
@@ -40,11 +41,14 @@ class TablesViewImpl : TablesView, AppCompatActivity() {
 
     }
 
-    fun setupRecyclerView(tablesMap: TablesMap) {
-        adapter = GridAdapter(tablesMap)
-        adapter!!.setTables(tablesMap)
+    fun setupRecyclerView() {
         recyclerView.layoutManager = GridLayoutManager(this, 5)
         recyclerView.addItemDecoration(GridAdapter.SpacesItemDecoration(dip(2.5F)))
+    }
+
+    fun refreshRecyclerView(tablesMap: TablesMap) {
+        adapter = GridAdapter(tablesMap)
+        adapter!!.setTables(tablesMap)
         recyclerView.adapter = adapter
     }
 
@@ -60,7 +64,7 @@ class TablesViewImpl : TablesView, AppCompatActivity() {
     }
 
     override fun updateTables(tablesMap: TablesMap) {
-        setupRecyclerView(tablesMap)
+        refreshRecyclerView(tablesMap)
     }
 
     override fun goBackToCustomers() {
