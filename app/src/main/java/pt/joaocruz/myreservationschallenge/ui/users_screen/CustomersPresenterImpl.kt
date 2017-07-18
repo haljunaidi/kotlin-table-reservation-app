@@ -13,6 +13,7 @@ class CustomersPresenterImpl(customersUseCase: GetCustomersUseCase, dataManager:
     var view : CustomersView?=null
     var useCase = customersUseCase
     var dm = dataManager
+    var selectedCustomer: Customer? = null
 
     override fun registerView(view: CustomersView) {
         this.view = view
@@ -30,6 +31,7 @@ class CustomersPresenterImpl(customersUseCase: GetCustomersUseCase, dataManager:
     }
 
     override fun customerSelected(customer: Customer) {
+        selectedCustomer = customer
         if (customer==null || customer.id==null || customer.id!!<0)
             view?.showError("Invalid user")
         else
