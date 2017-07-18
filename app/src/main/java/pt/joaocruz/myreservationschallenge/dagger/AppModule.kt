@@ -3,6 +3,7 @@ package pt.joaocruz.myreservationschallenge.dagger
 import android.content.Context
 import dagger.Module
 import dagger.Provides
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import pt.joaocruz.myreservationschallenge.App
 import pt.joaocruz.myreservationschallenge.data.*
@@ -65,17 +66,17 @@ class AppModule {
 
     @Provides
     internal fun provideCustomersUseCase(dataManager: DataManager) : GetCustomersUseCase {
-        return GetCustomersUseCase(dataManager, Schedulers.newThread(), Schedulers.io())
+        return GetCustomersUseCase(dataManager, Schedulers.newThread(), AndroidSchedulers.mainThread())
     }
 
     @Provides
     internal fun provideCustomerUseCase(dataManager: DataManager) : GetCustomerUseCase {
-        return GetCustomerUseCase(dataManager, Schedulers.newThread(), Schedulers.io())
+        return GetCustomerUseCase(dataManager, Schedulers.newThread(), AndroidSchedulers.mainThread())
     }
 
     @Provides
     internal fun provideTablesMapUseCase(dataManager: DataManager) : GetTablesMapUseCase {
-        return GetTablesMapUseCase(dataManager, Schedulers.newThread(), Schedulers.io())
+        return GetTablesMapUseCase(dataManager, Schedulers.newThread(), AndroidSchedulers.mainThread())
     }
 
 }
