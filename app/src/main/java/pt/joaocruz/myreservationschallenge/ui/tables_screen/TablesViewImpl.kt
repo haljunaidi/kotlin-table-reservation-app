@@ -71,6 +71,10 @@ class TablesViewImpl : TablesView, AppCompatActivity() {
         finish()
     }
 
+    override fun showError(message: String) {
+        // Show an alert/toast/whatever
+    }
+
     // Menu
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

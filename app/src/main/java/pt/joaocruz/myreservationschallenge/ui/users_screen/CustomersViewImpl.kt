@@ -38,4 +38,8 @@ class CustomersViewImpl : CustomersView, AppCompatActivity() {
         intent.putExtra("customer_id", customer.id)
         startActivity(intent)
     }
+
+    override fun showError(message: String) {
+        // Show an alert/toast/whatever
+    }
 }

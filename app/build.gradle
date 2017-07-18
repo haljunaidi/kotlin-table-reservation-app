@@ -52,6 +52,9 @@ dependencies {
     // Sugar ORM
     compile 'com.github.satyan:sugar:1.5'
 
+    // Mockito
+    testCompile "org.mockito:mockito-core:2.+"
+
 }
 repositories {
     mavenCentral()

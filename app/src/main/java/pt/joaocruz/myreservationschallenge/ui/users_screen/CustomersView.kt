@@ -9,5 +9,6 @@ interface CustomersView {
 
     fun updateCustomerList(customers: List<Customer>)
     fun showTablesScreenForCustomer(customer: Customer)
+    fun showError(message: String)
 
 }

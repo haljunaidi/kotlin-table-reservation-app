@@ -1,7 +1,5 @@
 package pt.joaocruz.myreservationschallenge.ui.tables_screen
 
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import pt.joaocruz.myreservationschallenge.data.DataManager
 import pt.joaocruz.myreservationschallenge.model.TablesMap
 import pt.joaocruz.myreservationschallenge.usecase.GetCustomerUseCase
@@ -23,8 +21,6 @@ class TablesPresenterImpl(tablesMapUseCase: GetTablesMapUseCase, customerUseCase
 
     override fun checkTables() {
         tablesUseCase.build()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
                 .doOnError {
                     // Service error. Should send something to the View
                 }
@@ -38,8 +34,6 @@ class TablesPresenterImpl(tablesMapUseCase: GetTablesMapUseCase, customerUseCase
         customerUseCase
                 .withID(id)
                 .build()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
                 .doOnError {
                     // Service error. Should send something to the View
                 }
@@ -52,8 +46,14 @@ class TablesPresenterImpl(tablesMapUseCase: GetTablesMapUseCase, customerUseCase
     }
 
     override fun clickedSubmitWithSelectedPosition(position: Int, tablesMap: TablesMap) {
-        tablesMap.tables?.set(position, false)
-        dm.saveTablesMap(tablesMap)
+        if (tablesMap.tables!=null) {
+            if (!tablesMap.tables!![position]) {
+                view?.showError("Table is occupied")
+            } else {
+                tablesMap.tables!![position] = false
+                dm.saveTablesMap(tablesMap)
+            }
+        }
         view?.goBackToCustomers()
     }
 }

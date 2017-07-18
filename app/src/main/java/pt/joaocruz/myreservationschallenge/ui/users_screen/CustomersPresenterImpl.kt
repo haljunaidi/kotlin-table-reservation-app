@@ -20,8 +20,6 @@ class CustomersPresenterImpl(customersUseCase: GetCustomersUseCase, dataManager:
 
     override fun checkCustomers() {
         useCase.build()
-                .subscribeOn(io.reactivex.schedulers.Schedulers.newThread())
-                .observeOn(io.reactivex.android.schedulers.AndroidSchedulers.mainThread())
                 .doOnError {
                     // Service error. Should send something to the View
                 }
@@ -32,6 +30,9 @@ class CustomersPresenterImpl(customersUseCase: GetCustomersUseCase, dataManager:
     }
 
     override fun customerSelected(customer: Customer) {
-        view?.showTablesScreenForCustomer(customer)
+        if (customer==null || customer.id==null || customer.id!!<0)
+            view?.showError("Invalid user")
+        else
+            view?.showTablesScreenForCustomer(customer)
     }
 }
