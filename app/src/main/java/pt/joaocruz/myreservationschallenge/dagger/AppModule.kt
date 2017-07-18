@@ -25,8 +25,8 @@ class AppModule {
     // Presenters
 
     @Provides
-    internal fun provideUsersPresenter(customersUseCase: GetCustomersUseCase, dataManager: DataManager): CustomersPresenter {
-        return CustomersPresenterImpl(customersUseCase, dataManager)
+    internal fun provideUsersPresenter(customersUseCase: GetCustomersUseCase, dataManager: DataManager, tablesMapUseCase: GetTablesMapUseCase): CustomersPresenter {
+        return CustomersPresenterImpl(customersUseCase, tablesMapUseCase, dataManager)
     }
 
     @Provides

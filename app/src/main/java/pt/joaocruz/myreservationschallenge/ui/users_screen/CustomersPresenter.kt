@@ -7,6 +7,7 @@ import pt.joaocruz.myreservationschallenge.model.Customer
  */
 interface CustomersPresenter {
 
+    fun checkTables()
     fun registerView(view: CustomersView)
     fun checkCustomers()
     fun customerSelected(customer: Customer)

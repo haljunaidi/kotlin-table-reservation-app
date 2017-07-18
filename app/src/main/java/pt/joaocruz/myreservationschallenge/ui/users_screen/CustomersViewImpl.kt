@@ -21,6 +21,7 @@ class CustomersViewImpl : CustomersView, AppCompatActivity() {
         setContentView(pt.joaocruz.myreservationschallenge.R.layout.activity_users_view_impl)
         App.getInstance().appComponent.inject(this)
         presenter.registerView(this)
+        presenter.checkTables()
         presenter.checkCustomers()
     }
 
