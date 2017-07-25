@@ -10,7 +10,9 @@ import android.os.SystemClock;
 import com.orm.SugarContext;
 
 import pt.joaocruz.myreservationschallenge.background.AlarmReceiver;
-import pt.joaocruz.myreservationschallenge.dagger.*;
+import pt.joaocruz.myreservationschallenge.dagger.components.AppComponent;
+import pt.joaocruz.myreservationschallenge.dagger.components.DaggerAppComponent;
+import pt.joaocruz.myreservationschallenge.dagger.modules.AppModule;
 
 /**
  * Created by jcruz on 17.07.17.
@@ -18,7 +20,7 @@ import pt.joaocruz.myreservationschallenge.dagger.*;
 
 public class App extends Application {
 
-    private static App instance;
+
     private AppComponent appComponent;
     private AlarmManager alarmMgr;
     private PendingIntent alarmIntent;
@@ -26,16 +28,15 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        instance = this;
         SugarContext.init(this);
         appComponent = DaggerAppComponent.builder()
-                .appModule(new AppModule())
+                .appModule(new AppModule(this))
                 .build();
         setupAlarmManager();
     }
 
-    public static App getInstance() {
-        return instance;
+    public static App getInstance(Context context) {
+        return (App) context.getApplicationContext();
     }
     public AppComponent getAppComponent() {
         return appComponent;

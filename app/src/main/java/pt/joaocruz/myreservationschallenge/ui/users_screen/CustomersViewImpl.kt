@@ -19,7 +19,7 @@ class CustomersViewImpl : CustomersView, AppCompatActivity() {
     override fun onCreate(savedInstanceState: android.os.Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(pt.joaocruz.myreservationschallenge.R.layout.activity_users_view_impl)
-        App.getInstance().appComponent.inject(this)
+        App.getInstance(this).appComponent.inject(this)
         presenter.registerView(this)
         presenter.checkTables()
         presenter.checkCustomers()

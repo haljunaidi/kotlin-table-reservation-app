@@ -2,8 +2,8 @@ package pt.joaocruz.myreservationschallenge.usecase
 
 import io.reactivex.Observable
 import io.reactivex.Scheduler
-import pt.joaocruz.myreservationschallenge.dagger.MainThreadScheduler
-import pt.joaocruz.myreservationschallenge.dagger.ThreadScheduler
+import pt.joaocruz.myreservationschallenge.dagger.qualifiers.MainThreadScheduler
+import pt.joaocruz.myreservationschallenge.dagger.qualifiers.ThreadScheduler
 import pt.joaocruz.myreservationschallenge.data.DataManager
 import pt.joaocruz.myreservationschallenge.model.TablesMap
 import javax.inject.Inject

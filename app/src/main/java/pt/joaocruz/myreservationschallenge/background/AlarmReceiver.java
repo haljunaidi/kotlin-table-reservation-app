@@ -21,10 +21,10 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, Intent intent) {
-        App.getInstance().getAppComponent().inject(this);
+        App.getInstance(context).getAppComponent().inject(this);
         dataManager.deleteAllReservations();
         Intent i = new Intent("pt.joaocruz.myreservationschallenge.dbupdate");
         i.putExtra("message", "BAM! NOTIFICATION");
-        App.getInstance().sendBroadcast(i);
+        App.getInstance(context).sendBroadcast(i);
     }
 }

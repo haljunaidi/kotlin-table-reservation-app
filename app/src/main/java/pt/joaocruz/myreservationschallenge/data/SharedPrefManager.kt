@@ -5,16 +5,18 @@ import android.content.SharedPreferences
 import com.google.gson.Gson
 import pt.joaocruz.myreservationschallenge.App
 import pt.joaocruz.myreservationschallenge.model.TablesMap
+import javax.inject.Inject
 
 /**
  * Created by jcruz on 17.07.17.
  */
-class SharedPrefManager {
+class SharedPrefManager @Inject constructor (val context: Context) {
 
     val SHARED_PREFERENCES = "myreservations_sp"
 
+
     private fun sharedPreferences(): SharedPreferences {
-        return App.getInstance().getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
+        return App.getInstance(context).getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
     }
 
     fun storeTablesMap(map: TablesMap) {

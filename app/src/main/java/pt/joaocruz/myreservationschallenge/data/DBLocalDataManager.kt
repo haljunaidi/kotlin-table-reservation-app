@@ -9,7 +9,7 @@ import pt.joaocruz.myreservationschallenge.model.TablesMap
 /**
  * Created by jcruz on 17.07.17.
  */
-class DBLocalDataManager : LocalDataManager {
+class DBLocalDataManager (val sharedPrefManager: SharedPrefManager): LocalDataManager {
 
 
     override fun storeCustomers(customers: List<Customer>) {
@@ -23,12 +23,11 @@ class DBLocalDataManager : LocalDataManager {
     }
 
     override fun storeTablesMap(tablesMap: TablesMap) {
-        val sp = SharedPrefManager()
-        sp.storeTablesMap(tablesMap)
+        sharedPrefManager.storeTablesMap(tablesMap)
     }
 
     override fun getTablesMap(): Observable<TablesMap> {
-        return Observable.just(SharedPrefManager().loadTablesMap())
+        return Observable.just(sharedPrefManager.loadTablesMap())
     }
 
     override fun getCustomerWithID(id: Long): Customer? {
@@ -40,7 +39,7 @@ class DBLocalDataManager : LocalDataManager {
     }
 
     override fun deleteAllReservations() {
-        var tablesMap = SharedPrefManager().loadTablesMap()
+        var tablesMap = sharedPrefManager.loadTablesMap()
         if (tablesMap.tables!=null) {
             for (i in 0..(tablesMap.tables!!.size-1)) {
                 tablesMap.tables!![i] = true

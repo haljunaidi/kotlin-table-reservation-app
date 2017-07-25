@@ -32,7 +32,7 @@ class TablesViewImpl : TablesView, AppCompatActivity() {
     override fun onCreate(savedInstanceState: android.os.Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(pt.joaocruz.myreservationschallenge.R.layout.activity_tables_layout)
-        App.getInstance().appComponent.inject(this)
+        App.getInstance(this).appComponent.inject(this)
         setupRecyclerView()
         var customer = intent.getLongExtra("customer_id", -1)
         presenter.registerView(this)
