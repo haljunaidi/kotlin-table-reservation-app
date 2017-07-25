@@ -1,19 +1,9 @@
 package pt.joaocruz.myreservationschallenge.dagger
 
-import android.content.Context
 import dagger.Module
 import dagger.Provides
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import pt.joaocruz.myreservationschallenge.App
 import pt.joaocruz.myreservationschallenge.data.*
-import pt.joaocruz.myreservationschallenge.ui.tables_screen.TablesPresenter
-import pt.joaocruz.myreservationschallenge.ui.tables_screen.TablesPresenterImpl
-import pt.joaocruz.myreservationschallenge.usecase.GetCustomersUseCase
-import pt.joaocruz.myreservationschallenge.ui.users_screen.CustomersPresenter
-import pt.joaocruz.myreservationschallenge.ui.users_screen.CustomersPresenterImpl
-import pt.joaocruz.myreservationschallenge.usecase.GetCustomerUseCase
-import pt.joaocruz.myreservationschallenge.usecase.GetTablesMapUseCase
 import javax.inject.Singleton
 
 /**
@@ -22,25 +12,10 @@ import javax.inject.Singleton
 @Module
 class AppModule {
 
-    // Presenters
-
-    @Provides
-    internal fun provideUsersPresenter(customersUseCase: GetCustomersUseCase, dataManager: DataManager, tablesMapUseCase: GetTablesMapUseCase): CustomersPresenter {
-        return CustomersPresenterImpl(customersUseCase, tablesMapUseCase, dataManager)
-    }
-
-    @Provides
-    internal fun provideTablesPresenter(tablesMapUseCase: GetTablesMapUseCase, customerUseCase: GetCustomerUseCase, dataManager: DataManager): TablesPresenter {
-        return TablesPresenterImpl(tablesMapUseCase, customerUseCase, dataManager)
-    }
-
-
-    // Managers
-
     @Singleton
     @Provides
-    internal fun providesDataManager(onlineDataManager: OnlineDataManager, networkServices: NetworkServices ,localDataManager: LocalDataManager): DataManager {
-        return DataManagerImpl(onlineDataManager, networkServices, localDataManager)
+    internal fun providesDataManager(dataManagerImpl: DataManagerImpl): DataManager {
+        return dataManagerImpl
     }
 
     @Singleton
@@ -61,22 +36,5 @@ class AppModule {
         return StockAndroidNetworkServices(App.getInstance())
     }
 
-
-    // Use cases
-
-    @Provides
-    internal fun provideCustomersUseCase(dataManager: DataManager) : GetCustomersUseCase {
-        return GetCustomersUseCase(dataManager, Schedulers.newThread(), AndroidSchedulers.mainThread())
-    }
-
-    @Provides
-    internal fun provideCustomerUseCase(dataManager: DataManager) : GetCustomerUseCase {
-        return GetCustomerUseCase(dataManager, Schedulers.newThread(), AndroidSchedulers.mainThread())
-    }
-
-    @Provides
-    internal fun provideTablesMapUseCase(dataManager: DataManager) : GetTablesMapUseCase {
-        return GetTablesMapUseCase(dataManager, Schedulers.newThread(), AndroidSchedulers.mainThread())
-    }
 
 }

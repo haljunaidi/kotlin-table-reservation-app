@@ -4,11 +4,12 @@ import pt.joaocruz.myreservationschallenge.data.DataManager
 import pt.joaocruz.myreservationschallenge.model.TablesMap
 import pt.joaocruz.myreservationschallenge.usecase.GetCustomerUseCase
 import pt.joaocruz.myreservationschallenge.usecase.GetTablesMapUseCase
+import javax.inject.Inject
 
 /**
  * Created by jcruz on 17.07.17.
  */
-class TablesPresenterImpl(tablesMapUseCase: GetTablesMapUseCase, customerUseCase: GetCustomerUseCase, dataManager: DataManager) : TablesPresenter {
+class TablesPresenterImpl @Inject constructor (tablesMapUseCase: GetTablesMapUseCase, customerUseCase: GetCustomerUseCase, dataManager: DataManager) : TablesPresenter {
 
     var view: TablesView?=null
     val tablesUseCase = tablesMapUseCase

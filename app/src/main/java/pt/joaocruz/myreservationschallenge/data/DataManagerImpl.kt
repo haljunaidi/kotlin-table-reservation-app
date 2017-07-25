@@ -3,11 +3,12 @@ package pt.joaocruz.myreservationschallenge.data
 import io.reactivex.Observable
 import pt.joaocruz.myreservationschallenge.model.Customer
 import pt.joaocruz.myreservationschallenge.model.TablesMap
+import javax.inject.Inject
 
 /**
  * Created by jcruz on 17.07.17.
  */
-class DataManagerImpl(onlineDataManager: OnlineDataManager, networkServices: NetworkServices, localDataManager: LocalDataManager) : DataManager {
+class DataManagerImpl @Inject constructor(onlineDataManager: OnlineDataManager, networkServices: NetworkServices, localDataManager: LocalDataManager) : DataManager {
 
     val remote = onlineDataManager
     val local = localDataManager

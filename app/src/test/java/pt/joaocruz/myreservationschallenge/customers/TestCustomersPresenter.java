@@ -7,6 +7,8 @@ import pt.joaocruz.myreservationschallenge.model.Customer;
 import pt.joaocruz.myreservationschallenge.ui.users_screen.CustomersPresenterImpl;
 import pt.joaocruz.myreservationschallenge.ui.users_screen.CustomersView;
 import pt.joaocruz.myreservationschallenge.usecase.GetCustomersUseCase;
+import pt.joaocruz.myreservationschallenge.usecase.GetTablesMapUseCase;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -24,9 +26,10 @@ public class TestCustomersPresenter {
     @Before
     public void setup() {
         GetCustomersUseCase cuc = mock(GetCustomersUseCase.class);
+        GetTablesMapUseCase tuc = mock(GetTablesMapUseCase.class);
         DataManager dm = mock(DataManager.class);
         CustomersView view = mock(CustomersView.class);
-        presenter = new CustomersPresenterImpl(cuc, dm);
+        presenter = new CustomersPresenterImpl(cuc, tuc, dm);
         presenter.registerView(view);
     }
 
