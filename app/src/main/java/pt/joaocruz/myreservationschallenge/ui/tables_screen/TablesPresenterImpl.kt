@@ -47,7 +47,7 @@ class TablesPresenterImpl @Inject constructor (tablesMapUseCase: GetTablesMapUse
     }
 
     override fun clickedSubmitWithSelectedPosition(position: Int, tablesMap: TablesMap) {
-        if (tablesMap.tables!=null) {
+        if (tablesMap.tables!=null && position>-1) {
             if (!tablesMap.tables!![position]) {
                 view?.showError("Table is occupied")
             } else {
