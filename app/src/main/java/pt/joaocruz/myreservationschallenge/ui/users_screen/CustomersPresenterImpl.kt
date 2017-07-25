@@ -9,13 +9,13 @@ import javax.inject.Inject
 /**
  * Created by jcruz on 17.07.17.
  */
-class CustomersPresenterImpl @Inject constructor(customersUseCase: GetCustomersUseCase, tablesMapUseCase: GetTablesMapUseCase, dataManager: DataManager) : CustomersPresenter {
+class CustomersPresenterImpl @Inject constructor(
+        val customersUseCase: GetCustomersUseCase,
+        val tablesMapUseCase: GetTablesMapUseCase,
+        val dataManager: DataManager) : CustomersPresenter {
 
 
     var view : CustomersView?=null
-    var useCase = customersUseCase
-    var tablesUseCase = tablesMapUseCase
-    var dm = dataManager
     var selectedCustomer: Customer? = null
 
     override fun registerView(view: CustomersView) {
@@ -23,12 +23,12 @@ class CustomersPresenterImpl @Inject constructor(customersUseCase: GetCustomersU
     }
 
     override fun checkCustomers() {
-        useCase.build()
+        customersUseCase.build()
                 .doOnError {
                     // Service error. Should send something to the View
                 }
                 .subscribe {
-                    dm.saveCustomerList(it)
+                    dataManager.saveCustomerList(it)
                     view?.updateCustomerList(it)
                 }
     }
@@ -42,13 +42,13 @@ class CustomersPresenterImpl @Inject constructor(customersUseCase: GetCustomersU
     }
 
     override fun checkTables() {
-        tablesUseCase
+        tablesMapUseCase
                 .build()
                 .doOnError {
                     // Service error. Notify the View
                 }
                 .subscribe {
-                    dm.saveTablesMap(it)
+                    dataManager.saveTablesMap(it)
                 }
 
     }

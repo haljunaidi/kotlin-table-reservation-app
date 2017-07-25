@@ -8,41 +8,40 @@ import javax.inject.Inject
 /**
  * Created by jcruz on 17.07.17.
  */
-class DataManagerImpl @Inject constructor(onlineDataManager: OnlineDataManager, networkServices: NetworkServices, localDataManager: LocalDataManager) : DataManager {
-
-    val remote = onlineDataManager
-    val local = localDataManager
-    val network = networkServices
+class DataManagerImpl @Inject constructor(
+        val onlineDataManager: OnlineDataManager,
+        val networkServices: NetworkServices,
+        val localDataManager: LocalDataManager) : DataManager {
 
     override fun getCustomersList(): Observable<ArrayList<Customer>> {
-        if (network.hasInternet())
-            return remote.getCustomers()
+        if (networkServices.hasInternet())
+            return onlineDataManager.getCustomers()
         else
-            return local.getCustomers()
+            return localDataManager.getCustomers()
     }
 
     override fun getTablesMap(): Observable<TablesMap> {
-        if (network.hasInternet())
-            return remote
+        if (networkServices.hasInternet())
+            return onlineDataManager
                     .getTablesMap()
                     .map { TablesMap().apply { tables = it } }
         else
-            return local.getTablesMap()
+            return localDataManager.getTablesMap()
     }
 
     override fun saveCustomerList(customers: List<Customer>) {
-        local.storeCustomers(customers)
+        localDataManager.storeCustomers(customers)
     }
 
     override fun saveTablesMap(tablesMap: TablesMap) {
-        local.storeTablesMap(tablesMap)
+        localDataManager.storeTablesMap(tablesMap)
     }
 
     override fun getCustomerWithID(id: Long): Customer? {
-        return local.getCustomerWithID(id)
+        return localDataManager.getCustomerWithID(id)
     }
 
     override fun deleteAllReservations() {
-        local.deleteAllReservations()
+        localDataManager.deleteAllReservations()
     }
 }

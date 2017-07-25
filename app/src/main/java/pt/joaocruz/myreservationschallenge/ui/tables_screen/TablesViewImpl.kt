@@ -11,13 +11,10 @@ import pt.joaocruz.myreservationschallenge.R
 import pt.joaocruz.myreservationschallenge.model.Customer
 import pt.joaocruz.myreservationschallenge.model.TablesMap
 import javax.inject.Inject
-import android.support.v4.app.NotificationCompat.getExtras
-import android.os.Bundle
 import android.content.Intent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.IntentFilter
-import org.jetbrains.anko.toast
 
 
 /**

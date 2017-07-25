@@ -11,12 +11,20 @@ import javax.inject.Inject
 /**
  * Created by jcruz on 17.07.17.
  */
-open class GetCustomerUseCase @Inject constructor (dataManager: DataManager, @ThreadScheduler newThreadScheduler: Scheduler, @MainThreadScheduler ioScheduler: Scheduler) : UseCase {
+open class GetCustomerUseCase @Inject constructor (
+        val dataManager: DataManager,
 
-    var dm = dataManager
+        @ThreadScheduler
+        val newThreadScheduler: Scheduler,
+
+        @MainThreadScheduler
+        val ioScheduler: Scheduler
+
+) : UseCase {
+
     var id: Long?=null
-    var newThreadScheduler = newThreadScheduler
-    var ioScheduler = ioScheduler
+
+
 
     fun withID(id: Long): GetCustomerUseCase {
         this.id = id
@@ -27,7 +35,7 @@ open class GetCustomerUseCase @Inject constructor (dataManager: DataManager, @Th
     // For simplicity, lets assume an empty customer is an invalid customer
     override fun build(): Observable<Customer> {
         if (id!=null && id!!>-1) {
-            val customer = dm.getCustomerWithID(id!!)
+            val customer = dataManager.getCustomerWithID(id!!)
             if (customer==null)
                 return applySchedulers(Observable.just(Customer()))
             else
@@ -35,6 +43,7 @@ open class GetCustomerUseCase @Inject constructor (dataManager: DataManager, @Th
         } else
             return applySchedulers(Observable.just(Customer()))
     }
+
 
     private fun applySchedulers(observable: Observable<Customer>) : Observable<Customer> {
         return observable

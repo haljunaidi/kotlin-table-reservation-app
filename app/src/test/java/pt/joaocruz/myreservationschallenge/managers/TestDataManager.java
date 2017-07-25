@@ -45,7 +45,7 @@ public class TestDataManager {
     public void testGetLocalCustomers() throws Exception {
         prepareForLocalTest();
         List<ArrayList<Customer>> list = dataManager.getCustomersList().toList().blockingGet();
-        verify(dataManager.getLocal(), times(1)).getCustomers();
+        verify(dataManager.getLocalDataManager(), times(1)).getCustomers();
         assertNotNull(list);
         assertEquals(list.size(), 1);
         assertEquals(list.get(0).size(), 1);
@@ -58,7 +58,7 @@ public class TestDataManager {
     public void testGetOnlineCustomers() throws Exception {
         prepareForOnlineTest();
         List<ArrayList<Customer>> list = dataManager.getCustomersList().toList().blockingGet();
-        verify(dataManager.getRemote(), times(1)).getCustomers();
+        verify(dataManager.getOnlineDataManager(), times(1)).getCustomers();
         assertNotNull(list);
         assertEquals(list.size(), 1);
         assertEquals(list.get(0).size(), 1);

@@ -11,14 +11,18 @@ import javax.inject.Inject
 /**
  * Created by jcruz on 17.07.17.
  */
-open class GetTablesMapUseCase @Inject constructor (dataManager: DataManager, @ThreadScheduler newThreadScheduler: Scheduler, @MainThreadScheduler ioScheduler: Scheduler) : UseCase {
+open class GetTablesMapUseCase @Inject constructor (
+        val dataManager: DataManager,
 
-    var dm = dataManager
-    var newThreadScheduler = newThreadScheduler
-    var ioScheduler = ioScheduler
+        @ThreadScheduler
+        val newThreadScheduler: Scheduler,
+
+        @MainThreadScheduler val ioScheduler: Scheduler
+
+) : UseCase {
 
     override fun build(): Observable<TablesMap> {
-        return dm.getTablesMap()
+        return dataManager.getTablesMap()
                 .subscribeOn(newThreadScheduler)
                 .observeOn(ioScheduler)
     }

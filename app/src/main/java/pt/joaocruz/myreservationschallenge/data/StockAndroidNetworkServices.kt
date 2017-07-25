@@ -8,12 +8,10 @@ import android.net.ConnectivityManager
 /**
  * Created by jcruz on 17.07.17.
  */
-class StockAndroidNetworkServices(context: Context) : NetworkServices {
-
-    var mContext = context
+class StockAndroidNetworkServices(val context: Context) : NetworkServices {
 
     override fun hasInternet(): Boolean {
-        val cm = mContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = cm.activeNetworkInfo
         return networkInfo != null && networkInfo.isAvailable && networkInfo.isConnectedOrConnecting
     }

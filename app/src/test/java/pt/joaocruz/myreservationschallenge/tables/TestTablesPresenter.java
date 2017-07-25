@@ -43,7 +43,7 @@ public class TestTablesPresenter {
     public void testSubmitWithNullTables() throws Exception {
         TablesMap map = nullTablesMap();
         presenter.clickedSubmitWithSelectedPosition(1, map);
-        verify(presenter.getDm(), times(0)).saveTablesMap(any(TablesMap.class));
+        verify(presenter.getDataManager(), times(0)).saveTablesMap(any(TablesMap.class));
         verify(presenter.getView(), times(1)).goBackToCustomers();
     }
 
@@ -53,7 +53,7 @@ public class TestTablesPresenter {
         assertEquals(map.getTables().get(1), true);
         presenter.clickedSubmitWithSelectedPosition(1, map);
         assertEquals(map.getTables().get(1), false);
-        verify(presenter.getDm(), times(1)).saveTablesMap(any(TablesMap.class));
+        verify(presenter.getDataManager(), times(1)).saveTablesMap(any(TablesMap.class));
         verify(presenter.getView(), times(1)).goBackToCustomers();
     }
 
@@ -64,7 +64,7 @@ public class TestTablesPresenter {
         presenter.clickedSubmitWithSelectedPosition(1, map);
         assertEquals(map.getTables().get(1), false);
         verify(presenter.getView(), times(1)).showError(any(String.class));
-        verify(presenter.getDm(), times(0)).saveTablesMap(any(TablesMap.class));
+        verify(presenter.getDataManager(), times(0)).saveTablesMap(any(TablesMap.class));
         verify(presenter.getView(), times(1)).goBackToCustomers();
     }
 
